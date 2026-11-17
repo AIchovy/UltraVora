@@ -1,0 +1,40 @@
+{
+  "name": "@ultracreator/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "ultracreator-server": "src/api/server.ts"
+  },
+  "scripts": {
+    "dev": "tsx watch src/api/server.ts",
+    "start": "tsx src/api/server.ts",
+    "voices:gen": "tsx scripts/generate-voice-samples.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "^0.85.1",
+    "@earendil-works/pi-ai": "^0.85.1",
+    "@fastify/cors": "^10.1.0",
+    "@fastify/multipart": "^9.4.0",
+    "@google-cloud/storage": "^7.21.0",
+    "@google/genai": "^2.7.0",
+    "@ultracreator/shared": "workspace:*",
+    "better-auth": "^1.6.16",
+    "drizzle-orm": "^0.45.2",
+    "fastify": "^5.8.5",
+    "pg": "^8.21.0",
+    "resend": "^6.14.0",
+    "sharp": "^0.34.5",
+    "typebox": "^1.1.39",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.4",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "form-data": "^4.0.5",
+    "hyperframes": "^0.6.63"
+  }
+}

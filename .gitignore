@@ -1,0 +1,29 @@
+node_modules/
+.env
+.env.local
+.env.*
+!.env.example
+!.env.local.example
+**/secrets/
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+.pnpm-store/
+workspaces/
+apps/server/secrets/
+dist/
+.DS_Store
+*.log
+*.tsbuildinfo
+.next/
+next-env.d.ts
+
+# cloned reference repos (skill sources, not part of this repo).
+# Anchored to the repo root so they don't also match the vendored copies under
+# apps/server/src/skills/vendor/.
+/gsap-skills/
+/hyperframes/
+
+.claire/
+.claude/

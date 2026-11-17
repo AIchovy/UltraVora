@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src", "test"],
+  // Vendored skill trees and the registry are runtime content (Markdown, HTML,
+  // assets, example sources), not server TypeScript — never type-check them.
+  "exclude": ["src/skills/vendor", "src/registry/vendor"]
+}

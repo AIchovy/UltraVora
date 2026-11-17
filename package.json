@@ -1,0 +1,20 @@
+{
+  "name": "ultracreator",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "vitest run --workspace ./vitest.suites.ts",
+    "test:watch": "vitest --workspace ./vitest.suites.ts",
+    "test:external": "vitest run -c vitest.external.config.ts",
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "dev:server": "pnpm -F @ultracreator/server dev",
+    "dev:web": "pnpm -F @ultracreator/web dev"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "tsx": "^4.19.2"
+  }
+}

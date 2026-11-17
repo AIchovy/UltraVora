@@ -1,0 +1,1 @@
+ALTER TABLE "creator_sessions" ADD COLUMN "auto_approve" boolean DEFAULT false NOT NULL;

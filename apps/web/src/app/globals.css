@@ -1,0 +1,321 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Blinking caret for the Input OTP slots (shadcn). */
+@theme {
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+}
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50% { opacity: 0; }
+}
+
+/* ----------------------------------------------------------------------------
+   UltraVora — premium light theme.
+   Depth over strokes: white surfaces float on a soft tinted canvas, separated
+   by layered, cool-tinted shadows and tone — not 1px borders. One cobalt
+   accent, one radius family, light-only by deliberate choice.
+---------------------------------------------------------------------------- */
+@theme {
+  /* Warm stone surfaces (darkest → lightest): sidebar, chat, canvas, card.
+     Hue ~70 keeps everything warm; widened steps so the rail reads intentional. */
+  --color-background: oklch(0.977 0.004 75);
+  --color-foreground: oklch(0.23 0.008 60);
+  --color-card: oklch(0.995 0.0015 75);
+  --color-card-foreground: oklch(0.23 0.008 60);
+  /* Floating menu/popover surface (dropdowns, command palette) — the same
+     elevated white as card, lifted off the canvas by shadow, not a stroke. */
+  --color-popover: oklch(0.995 0.0015 75);
+  --color-popover-foreground: oklch(0.23 0.008 60);
+  --color-muted: oklch(0.955 0.006 75);
+  --color-muted-foreground: oklch(0.52 0.012 65);
+  --color-border: oklch(0.915 0.007 75);
+  --color-input: oklch(0.915 0.007 75);
+
+  /* Distinct warm-stone sidebar rail — a clear step deeper than the canvas */
+  --color-sidebar: oklch(0.92 0.008 72);
+  --color-sidebar-foreground: oklch(0.23 0.008 60);
+
+  /* Single locked accent — warm charcoal. Monochrome: emphasis via dark/light. */
+  --color-primary: oklch(0.245 0.006 60);
+  --color-primary-foreground: oklch(0.985 0.003 75);
+  --color-accent: oklch(0.945 0.009 72);
+  --color-accent-foreground: oklch(0.3 0.008 60);
+  --color-ring: oklch(0.245 0.006 60);
+
+  --color-destructive: oklch(0.585 0.2 30);
+  --color-destructive-foreground: oklch(0.99 0 0);
+
+  /* Positive credit state — the topped-up "ready to continue" banner. A light
+     gold surface with the deep brand gold (#8a6a12, the same gold as
+     .upgrade-shine) gives the credit-restored state its own warm identity,
+     deliberately distinct from the red destructive banner used for "out of
+     credits". Foreground doubles as the solid fill for the Continue button. */
+  --color-credit-ready: oklch(0.93 0.06 88);
+  --color-credit-ready-foreground: #8a6a12;
+
+  /* Typography — Geist (set in layout via next/font), mono for numbers/code */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", "Cascadia Code",
+    monospace;
+
+  /* One radius family */
+  --radius: 1rem;
+
+  /* Soft, warm-tinted elevation — the only edge-defining device on the page */
+  --shadow-xs: 0 1px 2px rgba(60, 50, 38, 0.05);
+  --shadow-card: 0 1px 2px rgba(60, 50, 38, 0.05), 0 4px 14px -6px rgba(60, 50, 38, 0.1);
+  --shadow-raised: 0 1px 2px rgba(60, 50, 38, 0.05), 0 8px 22px -8px rgba(60, 50, 38, 0.13);
+  --shadow-panel: 0 1px 3px rgba(60, 50, 38, 0.05), 0 24px 56px -28px rgba(60, 50, 38, 0.18);
+  --shadow-pop: 0 16px 44px -12px rgba(60, 50, 38, 0.22);
+}
+
+/* Tailwind v4 dropped the v3 gray-200 default border color in favour of
+   currentColor, so the bare `border` utility (used by DropdownMenu, Command,
+   Dialog, badges, …) inherits the near-black text color — that's the stray
+   "black border" on the account menu. Pin the default to our warm token so
+   those surfaces get the intended faint hairline; explicit `border-*` colors
+   still win over this. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop {
+    border-color: var(--color-border);
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Quiet, edgeless scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.85 0.009 72) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: oklch(0.87 0.009 72);
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(0.81 0.011 72);
+}
+
+/* Honor reduced motion globally for any CSS-driven animation/transition. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Marketing landing — restrained entrance motion (phase 5 T3, append-only).
+   One-shot, transform/opacity only; the reduced-motion block above collapses
+   duration, and the delay reset below makes delayed elements appear instantly.
+---------------------------------------------------------------------------- */
+@theme {
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.3s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0ms !important;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Marketing landing — process-showcase + testimonials motion (append-only).
+   Continuous loops, transform/opacity/clip only. The reduced-motion block
+   above collapses each to a single instant frame; every base (un-animated)
+   state is also the resting state, so motion-off degrades to a clean still.
+   The traversal keyframes (sweep, scan) use container query units, so their
+   host needs `container-type: inline-size`.
+---------------------------------------------------------------------------- */
+@theme {
+  --animate-marquee: marquee 52s linear infinite;
+  --animate-sweep: sweep 5.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-scan: scan 4.5s ease-in-out infinite;
+  --animate-type: type 5.5s steps(26, end) infinite;
+  --animate-wave: wave 1.2s ease-in-out infinite;
+  --animate-fill: fill 5.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-scene: scene 5.5s ease-in-out infinite;
+  --animate-sheen: sheen 2.8s ease-in-out infinite;
+  --animate-pop: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes sweep {
+    0% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    6% {
+      opacity: 1;
+    }
+    86% {
+      opacity: 1;
+    }
+    90%,
+    100% {
+      transform: translateX(calc(100cqw - 2px));
+      opacity: 0;
+    }
+  }
+  @keyframes scan {
+    0% {
+      transform: translateX(-40%);
+      opacity: 0;
+    }
+    35%,
+    65% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(calc(100cqw + 40%));
+      opacity: 0;
+    }
+  }
+  @keyframes type {
+    0% {
+      clip-path: inset(0 100% 0 0);
+    }
+    52% {
+      clip-path: inset(0 0 0 0);
+    }
+    92%,
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes wave {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes fill {
+    0% {
+      transform: scaleX(0);
+    }
+    80%,
+    100% {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes scene {
+    0%,
+    100% {
+      background-color: var(--color-muted);
+      border-color: var(--color-border);
+    }
+    8%,
+    22% {
+      background-color: var(--color-card);
+      border-color: var(--color-foreground);
+    }
+  }
+  @keyframes sheen {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Credits menu — the one deliberate metallic flourish in an otherwise
+   monochrome UI. The "Upgrade" label is gold foil: a gradient clipped to the
+   text with a brighter band painted at 2× width, scrolled across on a slow
+   loop via background-position (the classic shiny-text technique — no JS, no
+   transform). The global reduced-motion block freezes it to a still gold fill.
+   Keyframes live at top level (not in @theme) so they emit even though the
+   class references the animation directly rather than via an animate-* utility.
+---------------------------------------------------------------------------- */
+@keyframes gold-shimmer {
+  to {
+    background-position: -200% center;
+  }
+}
+
+.upgrade-shine {
+  background: linear-gradient(
+    110deg,
+    #8a6a12 0%,
+    #8a6a12 38%,
+    #f4d98a 50%,
+    #8a6a12 62%,
+    #8a6a12 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gold-shimmer 2.6s linear infinite;
+}

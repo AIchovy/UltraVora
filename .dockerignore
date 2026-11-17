@@ -1,0 +1,25 @@
+# The web image (apps/web/Dockerfile) builds with the repo root as context;
+# keep the context lean and free of secrets.
+.git
+node_modules
+**/node_modules
+**/.next
+**/dist
+.claude
+.claire
+docs
+email-templates
+gsap-skills
+hyperframes
+apps/server/workspaces
+apps/server/secrets
+**/secrets
+**/*.pem
+**/*.key
+**/*service-account*.json
+**/*credentials*.json
+.pnpm-store
+**/.env
+**/.env.*
+**/*.log
+.DS_Store
