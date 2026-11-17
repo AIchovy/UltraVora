@@ -6,6 +6,18 @@
 
 A self-hostable AI video studio that researches your product, writes the script, creates visuals and voiceover, and renders the final cut.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-black)](LICENSE)
+[![Node.js 22+](https://img.shields.io/badge/Node.js-22%2B-5FA04E?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![TypeScript 5](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev/)
+
+[![Fastify 5](https://img.shields.io/badge/Fastify-5-black?logo=fastify&logoColor=white)](https://fastify.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![HyperFrames](https://img.shields.io/badge/HyperFrames-FF6B35)](https://github.com/heygen-com/hyperframes)
+[![GitHub stars](https://img.shields.io/github/stars/AIchovy/UltraVora?style=flat&logo=github)](https://github.com/AIchovy/UltraVora/stargazers)
+
 [简体中文](README.zh-CN.md) · [Quick start](#quick-start) · [Self-hosting](docs/deploy/gcp-production.md) · [Contributing](#contributing)
 
 </div>
