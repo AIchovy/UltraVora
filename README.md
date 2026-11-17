@@ -12,6 +12,8 @@ A self-hostable AI video studio that researches your product, writes the script,
 
 ![UltraVora product preview](docs/images/ultravora.png)
 
+![UltraVora studio](docs/images/ultravora-studio.png)
+
 ## What you can do
 
 - **Direct the whole production.** Review research, script, design and voiceover before rendering, or turn on automatic approval.

@@ -12,6 +12,8 @@
 
 ![UltraVora 产品预览](docs/images/ultravora.png)
 
+![UltraVora 工作台](docs/images/ultravora-studio.png)
+
 ## 能做什么
 
 - **掌控制作过程。** 逐步审核调研、脚本、设计和配音，也可以开启自动审批。
